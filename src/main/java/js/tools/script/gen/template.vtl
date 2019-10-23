@@ -1,0 +1,79 @@
+$package("${class.packageName}");
+
+/**
+ * ${class.name} class description.
+ */
+${class.qualifiedName} = {
+#set($unprocessedMethodsCount = $class.methods.size())
+#foreach($method in $class.methods)
+	/**
+	 * ${method.title}.
+	 *
+#foreach($param in $method.parameters)
+	 * @param ${param.Type} ${param.Name} ${param.description}, 
+#end
+	 * @param Function callback function to invoke on RMI completion,
+	 * @param Object scope optional callback run-time scope, default to global scope.
+#if($method.returnType)	 
+	 * @return ${method.returnType}
+#end
+#foreach($exceptionType in $method.exceptionTypes)
+	 * @throws ${exceptionType}
+#end
+	 * @assert callback is a {@link Function} and scope is an {@link Object}#if(!$method.returnType), if they are defined.
+	 * @note since method return type is void, callback, and hence scope too, is optional#end.
+	 */
+	${method.name}: function(${method.parametersList}) {
+#foreach($param in $method.parameters)
+		$assert(typeof ${param.name} !== "undefined", "${class.qualifiedName}#${method.name}", "${param.name} argument is undefined.");
+#if($param.kind == "array")
+		$assert($param.Name === null || js.lang.Types.isArray($param.Name), "${class.qualifiedName}#${method.name}", "${param.name} argument is not an array.");
+#end
+#if($param.kind == "string")
+		$assert($param.Name === null || js.lang.Types.isString($param.Name), "${class.qualifiedName}#${method.name}", "${param.name} argument is not a string.");
+#end
+#if($param.kind == "number")
+		$assert(js.lang.Types.isNumber($param.Name), "${class.qualifiedName}#${method.name}", "${param.name} argument is not a number.");
+#end
+#if($param.kind == "boolean")
+		$assert(js.lang.Types.isBoolean($param.Name), "${class.qualifiedName}#${method.name}", "${param.name} argument is not a boolean.");
+#end
+#if($param.kind == "date")
+		$assert($param.Name === null || js.lang.Types.isDate($param.Name), "${class.qualifiedName}#${method.name}", "${param.name} argument is not a date.");
+#end
+#end
+#if($method.parameters.size() > 0)
+
+#end
+#set($index = ${method.parameters.size()})
+		var __callback__ = arguments[$index];
+#if(!$method.returnType)
+		$assert(typeof __callback__ === "undefined" || js.lang.Types.isFunction(__callback__), "${class.qualifiedName}#${method.name}", "Callback is not a function.");
+#else
+		$assert(js.lang.Types.isFunction(__callback__), "${class.qualifiedName}#${method.name}", "Callback is not a function.");
+#end
+#set($index = $index + 1)
+		var __scope__ = arguments[$index];
+		$assert(typeof __scope__ === "undefined" || js.lang.Types.isObject(__scope__), "${class.qualifiedName}#${method.name}", "Scope is not an object.");
+		if(!js.lang.Types.isObject(__scope__)) {
+			__scope__ = window;
+		}
+
+		var rmi = new js.net.RMI();
+		rmi.setMethod("${class.qualifiedName}", "${method.name}");
+#if($method.parameters.size() > 0)
+		rmi.setParameters(${method.parametersList});
+#end
+		rmi.exec(__callback__, __scope__);
+	}#if($unprocessedMethodsCount > 1),
+
+#else
+
+#end
+#set($unprocessedMethodsCount = $unprocessedMethodsCount - 1)	
+#end
+}
+
+if(typeof ${class.name} === 'undefined') {
+	${class.name} = ${class.qualifiedName};
+}
