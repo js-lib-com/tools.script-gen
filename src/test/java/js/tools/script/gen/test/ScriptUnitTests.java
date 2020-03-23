@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import js.tools.commons.util.Classes;
+import js.util.Classes;
 import junit.framework.TestCase;
 
 @SuppressWarnings(

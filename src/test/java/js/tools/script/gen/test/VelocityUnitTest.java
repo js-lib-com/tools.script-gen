@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import js.tools.commons.util.Strings;
-import js.tools.commons.util.Types;
-import junit.framework.TestCase;
-
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+
+import js.util.Strings;
+import js.util.Types;
+import junit.framework.TestCase;
 
 public class VelocityUnitTest extends TestCase
 {
