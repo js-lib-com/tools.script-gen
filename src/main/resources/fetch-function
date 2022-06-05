@@ -1,0 +1,30 @@
+	fetch: function(url, parameters, callback, scope) {
+		var responsePromise = fetch(url, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(parameters)
+		});
+
+		var responseOK = true;
+		var jsonPromise = responsePromise.then(response => { 
+			if(!response.ok) {
+				responseOK = false;
+			}
+			if(response.headers.get("Content-Type")) { 
+				return response.json(); 
+			}
+		});
+
+		jsonPromise.then(json => {
+			if(!responseOK) {
+				if(this.errorHandler) {
+					this.errorHandler(json);
+				}
+				console.error(json);
+				return;
+			}
+			if (callback) {
+				callback.call(scope, json);
+			}
+		});
+	}
