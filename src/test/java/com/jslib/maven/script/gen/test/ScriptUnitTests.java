@@ -1,10 +1,11 @@
-package js.tools.script.gen.test;
+package com.jslib.maven.script.gen.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import js.util.Classes;
+import com.jslib.util.Classes;
+
 import junit.framework.TestCase;
 
 @SuppressWarnings(
@@ -15,7 +16,7 @@ public class ScriptUnitTests extends TestCase
 {
   public void testGenerateVoidMethod() throws Throwable
   {
-    Object compilationUnit = Classes.newInstance("js.tools.script.gen.JsClassImpl");
+    Object compilationUnit = Classes.newInstance("com.jslib.maven.script.gen.JsClassImpl");
     Classes.setFieldValue(compilationUnit, "packageName", "js.test");
     Classes.setFieldValue(compilationUnit, "qualifiedClassName", "js.test.ClassName");
     Classes.setFieldValue(compilationUnit, "className", "ClassName");
@@ -29,14 +30,14 @@ public class ScriptUnitTests extends TestCase
     methods.add(method);
     Classes.setFieldValue(compilationUnit, "methods", methods);
 
-    Class clazz = Class.forName("js.tools.script.gen.Script");
+    Class clazz = Class.forName("com.jslib.maven.script.gen.Script");
     String s = Classes.invoke(clazz, "generate", compilationUnit);
     System.out.println(s);
   }
 
   public void testGenerateMethodWithReturn() throws Throwable
   {
-    Object compilationUnit = Classes.newInstance("js.tools.script.gen.JsClassImpl");
+    Object compilationUnit = Classes.newInstance("com.jslib.maven.script.gen.JsClassImpl");
     Classes.setFieldValue(compilationUnit, "packageName", "js.test");
     Classes.setFieldValue(compilationUnit, "qualifiedClassName", "js.test.ClassName");
     Classes.setFieldValue(compilationUnit, "className", "ClassName");
@@ -50,14 +51,14 @@ public class ScriptUnitTests extends TestCase
     methods.add(method);
     Classes.setFieldValue(compilationUnit, "methods", methods);
 
-    Class clazz = Class.forName("js.tools.script.gen.Script");
+    Class clazz = Class.forName("com.jslib.maven.script.gen.Script");
     String s = Classes.invoke(clazz, "generate", compilationUnit);
     System.out.println(s);
   }
 
   private static Object createMethod(String name, List parameters, String returnType, String... thrownTypes) throws Exception
   {
-    Object method = Classes.newInstance("js.tools.script.gen.JsMethodImpl");
+    Object method = Classes.newInstance("com.jslib.maven.script.gen.JsMethodImpl");
     Classes.setFieldValue(method, "name", name);
     Classes.setFieldValue(method, "parameters", parameters);
     Classes.setFieldValue(method, "returnType", returnType);
@@ -67,6 +68,6 @@ public class ScriptUnitTests extends TestCase
 
   private static Object createParameter(String type, String name) throws Exception
   {
-    return Classes.newInstance("js.tools.script.gen.Parameter", type, name);
+    return Classes.newInstance("com.jslib.maven.script.gen.Parameter", type, name);
   }
 }

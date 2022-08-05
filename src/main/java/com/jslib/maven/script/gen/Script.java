@@ -1,10 +1,10 @@
-package js.tools.script.gen;
+package com.jslib.maven.script.gen;
 
 import java.io.IOException;
 import java.util.List;
 
-import js.util.Classes;
-import js.util.Strings;
+import com.jslib.util.Classes;
+import com.jslib.util.Strings;
 
 /**
  * Script generator.

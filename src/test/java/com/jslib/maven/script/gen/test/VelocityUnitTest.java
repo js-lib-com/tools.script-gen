@@ -1,4 +1,4 @@
-package js.tools.script.gen.test;
+package com.jslib.maven.script.gen.test;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -13,8 +13,9 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import js.util.Strings;
-import js.util.Types;
+import com.jslib.util.Strings;
+import com.jslib.util.Types;
+
 import junit.framework.TestCase;
 
 public class VelocityUnitTest extends TestCase
@@ -43,7 +44,7 @@ public class VelocityUnitTest extends TestCase
 
   private static JsClass loadClass() throws Exception
   {
-    Class<?> javaClass = Class.forName("js.tools.script.gen.JsClassImpl");
+    Class<?> javaClass = Class.forName("com.jslib.maven.script.gen.JsClassImpl");
 
     JsClass jsClass = new JsClass();
     jsClass.qualifiedName = javaClass.getName();

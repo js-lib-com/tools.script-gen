@@ -1,4 +1,4 @@
-package js.tools.script.gen;
+package com.jslib.maven.script.gen;
 
 /**
  * Script generator builder.

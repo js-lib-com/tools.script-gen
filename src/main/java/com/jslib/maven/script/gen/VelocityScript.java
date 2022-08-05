@@ -1,4 +1,4 @@
-package js.tools.script.gen;
+package com.jslib.maven.script.gen;
 
 import java.io.StringWriter;
 import java.io.Writer;
@@ -13,7 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import js.util.Strings;
+import com.jslib.util.Strings;
 
 public class VelocityScript
 {
